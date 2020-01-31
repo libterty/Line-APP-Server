@@ -1,7 +1,7 @@
 {
   "name": "linebot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "line app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,10 +11,11 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [
-    "LineAPI"
+    "LineAPI",
+    "LineAPP"
   ],
   "author": "11",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
