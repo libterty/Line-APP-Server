@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+- '12'
+services:
+- mongodb
+env:
+  matrix:
+  - NODE_ENV=test
+  global:
+  - secure: Ll9ehaHkFZkJ9L+ltXZ/UGNrlVwfYTY2jdRwUCOkoVVsgRHSFPu3Gt7PqFZKvq1kV1xho0ol7mR/KjBLBaOZ7nx23X68uQJq+siEng9Y6udys05e1XrMTQmDfrZrsT8HpjJHFG3KcAhJbHEqLQvlWikklg/CGnmCP5i1fGczerxGYfX3saE9gI9DfYO/Yv16dh8suvGdXxvX8/ClgKQpMPV/p1gSeB8Y8KBvf22H4Vk/BeSjT5crKBIF7FamsRMxocUjal8AEgVEmLywWRe5VAN8eW8YcgpBPzvT7XkcZ9zHgeTggX5B9T1zsyzMnNJmur5a5pc6mtfaRfwBrBv6uKML8ByPOGSiFk00ZTJHFMBQ9D7NRAozwouRheHNBfS8tvlNNapdHyj8ZDkMiHgTYcpSbJLRGqOIvGa7ZOGisiBMCNcMUrwxVoauk1oOaeJkU5nYpLw9ilrAFC4ov4hRrKX3Twx9nRYzFrbM9nGDNm78qpTXyj0sO13gImxwggQXxm4uMw6kSiIWQOAGszSWqXMhG36Fso4z0j47otMrP7GH94myaSooZo2qaKpcELB0Np126S1tlAk7Zkongg44zk9FbKKFfib5tlDyNjQbdGLZuYkO4AIMvbM7LCV/IonShaY5zbD9lnjn1p7kUXOZzxZnZDp+USgtlu/3yD3v+UY=
+before_install:
+- npm install
+before_script:
+- sleep 15
+- mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+script:
+- npm test
+deploy:
+  provider: heroku
+  app: lineappserver
+  api_key:
+    secure: 99f3c503-855e-41e3-94a7-9edfe8fc26e7
+  run:
+  - npm start
+after_success:
+- npm run coveralls
