@@ -38,6 +38,7 @@ app.use(
   session({
     store: new RedisStore({ client: redisClient }),
     secret: 'lineappserver',
+    name: 'lineappserver',
     resave: false,
     saveUninitialized: false
   })

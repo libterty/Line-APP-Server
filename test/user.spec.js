@@ -130,3 +130,21 @@ describe('# When Admin Request', () => {
     });
   });
 });
+
+describe('# When Request to get User Data', () => {
+  context('# When User Request session data', () => {
+    describe('When User Request hit endpoint /get_currnet_user', () => {
+      it('should able to get User session data', done => {
+        request(app)
+          .get('/api/v1/get_current_user')
+          .set('Accept', 'application/json')
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.status).to.eq('success');
+            expect(res.body.user.token).to.eq('mockToken');
+            done();
+          });
+      });
+    });
+  });
+});
