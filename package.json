@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=devlopment nodemon index.js",
     "test": "nyc mocha test --exit --recursive --timeout 5000 || true",
     "lint": "eslint --format table --fix .",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "seeds": "node database/models/seeds/index.js"
   },
   "keywords": [
     "LineAPI",
@@ -25,6 +26,7 @@
     "prettier": "^1.19.1"
   },
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
