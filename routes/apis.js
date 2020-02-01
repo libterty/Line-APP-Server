@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('../middlewares/passport');
 const userController = require('../controllers/userController');
+const shopConrtoller = require('../controllers/shopController');
 const passportJWT = require('../middlewares/jwt');
 const authenticatedAdmin = require('../middlewares/admin');
 const authenticated = passportJWT.authenticate('jwt', { session: false });
@@ -29,5 +30,25 @@ router.get('/admin/test', authenticated, authenticatedAdmin, (req, res) => {
 });
 
 router.post('/admin/signin', userController.signIn);
+
+router.get('/shops', authenticated, shopConrtoller.getShops);
+router.post(
+  '/shops/create',
+  authenticated,
+  authenticatedAdmin,
+  shopConrtoller.postShops
+);
+router.put(
+  '/shops/edit/:shopId',
+  authenticated,
+  authenticatedAdmin,
+  shopConrtoller.putShop
+);
+router.delete(
+  '/shops/delete/:shopId',
+  authenticated,
+  authenticatedAdmin,
+  shopConrtoller.deleteShop
+);
 
 module.exports = router;
