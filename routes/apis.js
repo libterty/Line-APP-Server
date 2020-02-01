@@ -29,8 +29,8 @@ router.get('/admin/test', authenticated, authenticatedAdmin, (req, res) => {
     .json({ status: 'success', message: 'admin authenticated test' });
 });
 
+router.get('/get_current_user', userController.getCurrentUser);
 router.post('/admin/signin', userController.signIn);
-
 router.get('/shops', authenticated, shopConrtoller.getShops);
 router.post(
   '/shops/create',

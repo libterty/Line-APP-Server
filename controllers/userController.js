@@ -18,16 +18,19 @@ const userController = {
       { expiresIn: '7d' },
       { algorithm: 'RS256' }
     );
-    return res.status(200).json({
-      status: 'success',
-      message: 'login success',
+    req.session.userInfo = {
       token,
       user: {
         id: helpers.getUser(req)._id,
         name: helpers.getUser(req).name,
-        isAdmin: helpers.getUser(req).isAdmin
+        isAdmin: false
       }
-    });
+    };
+    return res.redirect(
+      process.env.successRedirect
+        ? process.env.successRedirect
+        : 'http://localhost:8080/line'
+    );
   },
 
   signIn: (req, res) => {
@@ -67,6 +70,14 @@ const userController = {
         { algorithm: 'RS256' }
       );
 
+      req.session.userInfo = {
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          isAdmin: user.isAdmin
+        }
+      };
       return res.status(200).json({
         status: 'success',
         message: 'Welcome Back Admin',
@@ -78,6 +89,31 @@ const userController = {
         }
       });
     });
+  },
+
+  getCurrentUser: (req, res) => {
+    const mockSession = {
+      token: 'mockToken',
+      user: {
+        id: 'mockId',
+        name: 'mockName',
+        isAdmin: false
+      }
+    };
+    const user =
+      process.env.NODE_ENV !== 'test' ? req.session.userInfo : mockSession;
+
+    if (!user) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Cannot find User data'
+      });
+    } else {
+      return res.status(200).json({
+        status: 'success',
+        user
+      });
+    }
   }
 };
 

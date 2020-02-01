@@ -14,11 +14,11 @@ passport.use(
     },
     function(accessToken, refreshToken, params, profile, cb) {
       return User.findOne({
-        id: profile.userId
+        id: profile.id
       }).then(user => {
         if (!user) {
           new User({
-            id: profile.userId,
+            id: profile.id,
             name: profile.displayName ? profile.displayName : null,
             email: profile.email ? profile.email : null,
             picture: profile.pictureUrl ? profile.pictureUrl : null,
