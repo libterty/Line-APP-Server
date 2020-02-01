@@ -29,7 +29,7 @@ const userController = {
     return res.redirect(
       process.env.successRedirect
         ? process.env.successRedirect
-        : 'http://localhost:8080/line'
+        : 'http://localhost:8080/line/success'
     );
   },
 
@@ -89,6 +89,13 @@ const userController = {
         }
       });
     });
+  },
+
+  signOut: (req, res) => {
+    req.logout();
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'Signout Success' });
   },
 
   getCurrentUser: (req, res) => {

@@ -131,6 +131,65 @@ describe('# When Admin Request', () => {
   });
 });
 
+describe('# When User Request', () => {
+  context('# When User request for signout', () => {
+    describe('When Request hit the endpoint /signout', () => {
+      let token;
+      before(async () => {
+        await new User({
+          name: 'test',
+          email: 'test@example.com',
+          password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
+          isAdmin: true
+        }).save();
+      });
+
+      it('Should return 200 when info is correct and able to signin', done => {
+        request(app)
+          .post('/api/v1/admin/signin')
+          .send({ email: 'test@example.com', password: '12345678' })
+          .set('Accept', 'application/json')
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.status).to.eq('success');
+            expect(res.body.message).to.eq('Welcome Back Admin');
+            token = res.body.token;
+            done();
+          });
+      });
+
+      it('Should return 401 When user did not provide token', done => {
+        request(app)
+          .get('/api/v1/signout')
+          .set('Authorization', 'bearer ' + '')
+          .set('Accept', 'application/json')
+          .expect(401)
+          .end((err, res) => {
+            expect(res.text).to.eq('Unauthorized');
+            done();
+          });
+      });
+
+      it('Should return 200 When user did not provide token', done => {
+        request(app)
+          .get('/api/v1/signout')
+          .set('Authorization', 'bearer ' + token)
+          .set('Accept', 'application/json')
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.status).to.eq('success');
+            expect(res.body.message).to.eq('Signout Success');
+            done();
+          });
+      });
+
+      after(async () => {
+        await User.findOneAndDelete({ name: 'test' });
+      });
+    });
+  });
+});
+
 describe('# When Request to get User Data', () => {
   context('# When User Request session data', () => {
     describe('When User Request hit endpoint /get_currnet_user', () => {
