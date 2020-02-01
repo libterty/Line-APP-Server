@@ -29,7 +29,7 @@ const userController = {
     return res.redirect(
       process.env.successRedirect
         ? process.env.successRedirect
-        : 'http://localhost:8080/shops'
+        : 'http://localhost:8080/line'
     );
   },
 
