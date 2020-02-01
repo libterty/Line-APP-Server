@@ -19,7 +19,11 @@ router.get('/auth/line', passport.authenticate('line'));
 
 router.get(
   '/auth/line/callback',
-  passport.authenticate('line', { failureRedirect: '/api/v1/auth/line' }),
+  passport.authenticate('line', {
+    failureRedirect: process.env.failRedirect
+      ? process.env.failRedirect
+      : 'http://localhost:8080/line/fail'
+  }),
   userController.lineCallBack
 );
 
@@ -30,6 +34,7 @@ router.get('/admin/test', authenticated, authenticatedAdmin, (req, res) => {
 });
 
 router.get('/get_current_user', userController.getCurrentUser);
+router.get('/signout', authenticated, userController.signOut);
 router.post('/admin/signin', userController.signIn);
 router.get('/shops', authenticated, shopConrtoller.getShops);
 router.post(
