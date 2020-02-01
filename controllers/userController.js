@@ -9,7 +9,7 @@ const userController = {
       _id: helpers.getUser(req)._id,
       iat: Date.now(),
       name: helpers.getUser(req).name,
-      isAdmin: helpers.getUser(req).isAdmin,
+      isAdmin: false,
       blacklist: false
     };
     const token = jwt.sign(

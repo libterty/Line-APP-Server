@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('../user');
+const Shop = require('../shop');
 const user = require('./users.json');
+const shop = require('./shops.json').results;
 const databaseUrl =
   process.env.NODE_ENV === 'production'
     ? process.env.MONGODB_URI
@@ -37,5 +39,13 @@ db.once('open', () => {
         newUser.save();
       });
     });
+  });
+  shop.forEach(shop => {
+    new Shop({
+      shopName: shop.shopName,
+      shopAddress: shop.shopAddress,
+      shopTel: shop.shopTel,
+      representative: shop.representative
+    }).save();
   });
 });

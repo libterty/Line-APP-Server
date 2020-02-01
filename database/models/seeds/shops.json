@@ -1,0 +1,28 @@
+{
+    "results": [
+        {
+            "shopName": "老李地產",
+            "shopAddress": "老李國老李市老李路196號",
+            "shopTel": "02-8888-8888",
+            "representative": "老李"
+        },
+        {
+            "shopName": "老二地產",
+            "shopAddress": "老二國老二市老二路196號",
+            "shopTel": "03-8888-8888",
+            "representative": "老二"
+        },
+        {
+            "shopName": "老三地產",
+            "shopAddress": "老三國老三市老三路196號",
+            "shopTel": "04-8888-8888",
+            "representative": "老三"
+        },
+        {
+            "shopName": "老四地產",
+            "shopAddress": "老四國老四市老四路196號",
+            "shopTel": "05-8888-8888",
+            "representative": "老四"
+        }
+    ]
+}
