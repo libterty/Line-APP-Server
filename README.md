@@ -1,11 +1,11 @@
 # Line App Server
 
-- Simple Line App API Server which allows you to login with Line oauth2 login api, after granting token you can access protected routes
-- [DEMO](https://lineappserver.herokuapp.com/api/v1)
-
 [![Build Status](https://travis-ci.org/libterty/Line-APP-Server.svg?branch=master)](https://travis-ci.org/libterty/Line-APP-Server)
 [![Coverage Status](https://coveralls.io/repos/github/libterty/Line-APP-Server/badge.svg?branch=master)](https://coveralls.io/github/libterty/Line-APP-Server?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/libterty/Line-APP-Server/blob/master/LICENCE)
+
+- Simple Line App API Server which allows you to login with Line oauth2 login api, after granting token you can access protected routes
+- [DEMO](https://lineappserver.herokuapp.com/api/v1)
 
 # CopyRight
 Copyright © 2020, 11. Released under the MIT License.
@@ -51,15 +51,14 @@ $ npm install
 
 ### Init DataBase
 
-
-- MongoDB
+> :floppy_disk: MongoDB
 ```
 $ mongo
 
 $ mongod
 ```
 
-- Redis
+> :floppy_disk: Redis
 ```
 $ redis-server
 ```
