@@ -44,7 +44,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-line-auth": "^0.2.8",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0",
     "supertest": "^4.0.2"
